@@ -1,0 +1,16 @@
+# docker-compose.yml
+
+version: '3.8'  # Define the Docker Compose file format version
+
+services:
+  backend:  # Name of the service
+    build: ./backend  # Path to the Dockerfile and code for this service
+    container_name: synerg-backend  # Optional: sets a readable name for the container
+    ports:
+      - "5000:5000"  # Maps container port 5000 to your local machine's port 5000
+    volumes:
+      - ./backend:/app  # Mount your backend code inside the container (enables live updates)
+      - /app/node_modules  # Avoid overwriting node_modules inside container with host files
+    env_file:
+      - ./backend/.env  # Load environment variables from the .env file in backend/
+    restart: unless-stopped  # Auto-restart unless you explicitly stop it

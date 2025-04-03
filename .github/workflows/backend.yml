@@ -1,0 +1,38 @@
+# .github/workflows/backend.yml
+
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'backend/**'  # Se déclenche uniquement si le dossier backend est modifié
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend  # Toutes les commandes seront exécutées depuis ce dossier
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check Docker build
+        run: docker build -t synerg-backend .
+
+      # (Optionnel) Ajoute ici des tests si tu en as
+      # - name: Run tests
+      #   run: npm run test
