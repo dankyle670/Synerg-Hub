@@ -3,17 +3,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../css/Login.module.css";
 
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/login", {
+      const res = await axios.post(`${API_URL}/api/login`, {
         email,
         password,
       });
@@ -38,6 +39,7 @@ function Login() {
           className={styles.input}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -46,6 +48,7 @@ function Login() {
           className={styles.input}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button type="submit" className={styles.button}>
