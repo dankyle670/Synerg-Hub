@@ -6,6 +6,7 @@ import cors from 'cors';
 import authRoutes from './routes/Auth.js';
 import { protect } from './middlewares/AuthMiddleware.js';
 import { allowRoles } from './middlewares/RoleMiddleware.js';
+import aiRoutes from "./routes/Ai.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,8 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes
 app.use('/api', authRoutes);
+app.use("/api/ai", aiRoutes);
+
 
 // Protected route example
 app.get('/api/profile', protect, (req, res) => {

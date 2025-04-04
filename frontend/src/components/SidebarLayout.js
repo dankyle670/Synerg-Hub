@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "../css/Dashboard.module.css";
+import ChatWidget from "./ChatWidget";
 
 function SidebarLayout({ children }) {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -38,6 +39,9 @@ function SidebarLayout({ children }) {
 
         <section className={styles.content}>{children}</section>
       </div>
+
+      {/*SynergHub AI Assistant */}
+      <ChatWidget />
     </div>
   );
 }
