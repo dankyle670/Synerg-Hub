@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "../css/ChatWidget.module.css";
 
+// Use environment variable for the backend base URL
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -17,11 +20,11 @@ function ChatWidget() {
     setInput("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/ai", { message: input });
+      const res = await axios.post(`${API_URL}/api/ai`, { message: input });
       const aiMessage = { sender: "ai", text: res.data.reply };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (err) {
-      const errorMessage = { sender: "ai", text: " Error connecting to AI." };
+      const errorMessage = { sender: "ai", text: "Error connecting to AI." };
       setMessages((prev) => [...prev, errorMessage]);
     }
   };

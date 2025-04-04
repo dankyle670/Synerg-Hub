@@ -3,6 +3,9 @@ import axios from "axios";
 import styles from "../css/AllUsers.module.css";
 import SidebarLayout from "../components/SidebarLayout";
 
+// Use env variable for backend API
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function AllUsers() {
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
@@ -11,7 +14,7 @@ function AllUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users", {
+        const res = await axios.get(`${API_URL}/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -27,7 +30,7 @@ function AllUsers() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`, {
+      await axios.delete(`${API_URL}/api/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

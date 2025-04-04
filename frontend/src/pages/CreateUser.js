@@ -3,6 +3,9 @@ import axios from "axios";
 import styles from "../css/CreateUser.module.css";
 import SidebarLayout from "../components/SidebarLayout";
 
+// Use the environment variable defined in .env (CRA syntax)
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 function CreateUser() {
   const [formData, setFormData] = useState({
     username: "",
@@ -23,7 +26,7 @@ function CreateUser() {
     e.preventDefault();
     setMessage("");
     try {
-      await axios.post("http://localhost:5000/api/users", formData, {
+      await axios.post(`${API_URL}/api/users`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,9 +40,7 @@ function CreateUser() {
         pole: "dev",
       });
     } catch (err) {
-      setMessage(
-        "❌ " + (err.response?.data?.error || "User creation failed")
-      );
+      setMessage("❌ " + (err.response?.data?.error || "User creation failed"));
     }
   };
 
