@@ -5,7 +5,6 @@ import SidebarLayout from "../components/SidebarLayout";
 
 function Profile() {
   const token = localStorage.getItem("token");
-  //const storedUser = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -22,7 +21,7 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/profile", {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(res.data.user);
@@ -42,13 +41,13 @@ function Profile() {
     e.preventDefault();
     setMessage("");
     try {
-      const res = await axios.put("http://localhost:5000/api/profile", formData, {
+      const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/profile`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setMessage("✅ Profile updated successfully!");
-      localStorage.setItem("user", JSON.stringify(res.data.user)); // update localStorage
+      setMessage("Profile updated successfully!");
+      localStorage.setItem("user", JSON.stringify(res.data.user));
     } catch (err) {
-      setMessage("❌ Failed to update profile");
+      setMessage("Failed to update profile");
     }
   };
 
