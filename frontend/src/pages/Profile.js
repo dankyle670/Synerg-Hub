@@ -5,7 +5,7 @@ import SidebarLayout from "../components/SidebarLayout";
 
 function Profile() {
   const token = localStorage.getItem("token");
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  //const storedUser = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({
     username: "",
     email: "",

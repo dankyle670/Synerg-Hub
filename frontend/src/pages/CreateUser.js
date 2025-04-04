@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../css/CreateUser.module.css";
 import SidebarLayout from "../components/SidebarLayout";
@@ -15,7 +14,6 @@ function CreateUser() {
 
   const [message, setMessage] = useState("");
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
