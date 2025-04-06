@@ -27,13 +27,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/users', protect, allowRoles(
-    'president',
-    'vice-president',
-    'secretaire-general',
-    'tresorier',
-    'cio'
-  ), async (req, res) => {
+router.post('/users', protect, allowRoles('admin'), async (req, res) => {
     const { username, email, password, role, pole } = req.body;
     try {
       const existing = await User.findOne({ email });
@@ -50,7 +44,8 @@ router.post('/users', protect, allowRoles(
     'vice-president',
     'secretaire-general',
     'tresorier',
-    'cio'
+    'cio',
+    'admin'
   ), async (req, res) => {
     try {
       const users = await User.find().select("-password"); // don't expose passwords
@@ -60,13 +55,7 @@ router.post('/users', protect, allowRoles(
     }
   });
 
-  router.delete('/users/:id', protect, allowRoles(
-    'president',
-    'vice-president',
-    'secretaire-general',
-    'tresorier',
-    'cio'
-  ), async (req, res) => {
+  router.delete('/users/:id', protect, allowRoles('admin'), async (req, res) => {
     try {
       const user = await User.findByIdAndDelete(req.params.id);
       if (!user) return res.status(404).json({ error: 'User not found' });
@@ -115,8 +104,8 @@ router.put('/profile', protect, async (req, res) => {
 //        username: 'admin',
 //        email: 'admin@synerghetic.com',
 //        password: 'admin1234', // Will be hashed via pre-save hook
-//        role: 'cio',
-//        pole: 'dev',
+//        role: 'admin',
+//        pole: 'admin',
 //      });
 //      res.status(201).json({ message: 'Admin created', user: admin });
 //    } catch (err) {

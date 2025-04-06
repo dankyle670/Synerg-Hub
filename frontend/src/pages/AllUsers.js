@@ -37,7 +37,8 @@ function AllUsers() {
       });
       setUsers(users.filter((u) => u._id !== id));
     } catch (err) {
-      setMessage("Error deleting user.");
+      //setMessage("Error deleting user.");
+      setMessage((err.response?.data?.error || "User creation failed"));
     }
   };
 

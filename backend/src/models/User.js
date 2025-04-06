@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema(
         'cio',
         'resp-com',
         'resp-dev',
-        'resp-compta'
+        'resp-compta',
+        'admin'
       ],
       required: true
     },
@@ -33,7 +34,8 @@ const userSchema = new mongoose.Schema(
         'rh',
         'juridique',
         'partenariat',
-        'strategie'
+        'strategie',
+        'admin'
       ],
       required: true
     },

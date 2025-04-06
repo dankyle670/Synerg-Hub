@@ -40,7 +40,7 @@ function CreateUser() {
         pole: "dev",
       });
     } catch (err) {
-      setMessage("❌ " + (err.response?.data?.error || "User creation failed"));
+      setMessage((err.response?.data?.error || "User creation failed"));
     }
   };
 
